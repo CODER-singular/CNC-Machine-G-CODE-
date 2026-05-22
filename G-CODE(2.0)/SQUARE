@@ -1,0 +1,44 @@
+; Square - CNC Pen Machine
+; Centered coordinate system
+; X axis: -0.972mm to +0.972mm
+; Y axis: -1.140mm to +1.140mm
+; Square uses X limits: -0.972 to +0.972
+; Square uses Y limits: -0.972 to +0.972 (square = equal sides)
+; Units: mm | Absolute positioning
+
+G21        ; Millimeters
+G90        ; Absolute positioning
+G28        ; Home all axes
+G0 Z5.0
+G0 X0.000 Y0.000
+
+; ==================
+; SQUARE
+; ==================
+
+; --- Move to bottom-left corner ---
+G0 X-0.972 Y-0.972
+
+; --- Pen DOWN ---
+G1 Z-5.0 F300
+
+; --- Bottom edge (left to right) ---
+G1 X0.972 Y-0.972 F500
+
+; --- Right edge (bottom to top) ---
+G1 X0.972 Y0.972 F500
+
+; --- Top edge (right to left) ---
+G1 X-0.972 Y0.972 F500
+
+; --- Left edge (top to bottom, closes square) ---
+G1 X-0.972 Y-0.972 F500
+
+; --- Pen UP ---
+G1 Z5.0 F300
+
+; ==================
+; END - Return to origin
+; ==================
+G0 X0.000 Y0.000
+M2
