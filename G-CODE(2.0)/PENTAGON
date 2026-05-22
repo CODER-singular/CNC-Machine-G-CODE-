@@ -1,0 +1,54 @@
+; Pentagon - CNC Pen Machine
+; Centered coordinate system
+; X axis: -0.972mm to +0.972mm
+; Y axis: -1.140mm to +1.140mm
+; Regular pentagon centered at (0,0)
+; Radius: 0.950mm (fits within both axis limits)
+; Units: mm | Absolute positioning
+
+G21        ; Millimeters
+G90        ; Absolute positioning
+G28        ; Home all axes
+G0 Z5.0
+G0 X0.000 Y0.000
+
+; Pentagon points (radius=0.950, starting from top):
+; P1 (top):    X= 0.000  Y= 0.950
+; P2 (upper-right): X= 0.903  Y= 0.293
+; P3 (lower-right): X= 0.558  Y=-0.769
+; P4 (lower-left):  X=-0.558  Y=-0.769
+; P5 (upper-left):  X=-0.903  Y= 0.293
+
+; ==================
+; PENTAGON
+; ==================
+
+; --- Move to top point (P1) ---
+G0 X0.000 Y0.950
+
+; --- Pen DOWN ---
+G1 Z-5.0 F300
+
+; --- P1 to P2 ---
+G1 X0.903 Y0.293 F500
+
+; --- P2 to P3 ---
+G1 X0.558 Y-0.769 F500
+
+; --- P3 to P4 ---
+G1 X-0.558 Y-0.769 F500
+
+; --- P4 to P5 ---
+G1 X-0.903 Y0.293 F500
+
+; --- P5 back to P1 (close shape) ---
+G1 X0.000 Y0.950 F500
+
+; --- Pen UP ---
+G1 Z5.0 F300
+
+; ==================
+; END - Return to origin
+; ==================
+G0 X0.000 Y0.000
+M2
