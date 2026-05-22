@@ -1,0 +1,83 @@
+; 5-Pointed Star - CNC Pen Machine
+; Centered coordinate system
+; X axis: -0.972mm to +0.972mm
+; Y axis: -1.140mm to +1.140mm
+; Outer radius: 0.950mm
+; Inner radius: 0.380mm
+; Center: (0.000, 0.000)
+; Units: mm | Absolute positioning
+;
+; Outer points calculated as:
+; x = r_outer * cos(90 + 72*n degrees)
+; y = r_outer * sin(90 + 72*n degrees)
+;
+; Inner points calculated as:
+; x = r_inner * cos(90 + 36 + 72*n degrees)
+; y = r_inner * sin(90 + 36 + 72*n degrees)
+;
+; OP1:  90°       X= 0.000  Y= 0.950
+; OP2: 162°       X=-0.903  Y= 0.294
+; OP3: 234°       X=-0.559  Y=-0.769
+; OP4: 306°       X= 0.559  Y=-0.769
+; OP5: 378°       X= 0.903  Y= 0.294
+;
+; IP1: 126°       X=-0.217  Y= 0.300
+; IP2: 198°       X=-0.361  Y=-0.117
+; IP3: 270°       X= 0.000  Y=-0.380
+; IP4: 342°       X= 0.361  Y=-0.117
+; IP5:  54°       X= 0.217  Y= 0.300
+
+G21        ; Millimeters
+G90        ; Absolute positioning
+G28        ; Home all axes
+G0 Z5.0
+G0 X0.000 Y0.000
+
+; ==================
+; STAR
+; ==================
+
+; --- Rapid to starting point OP1 (top) ---
+G0 X0.000 Y0.950
+
+; --- Pen DOWN ---
+G1 Z-5.0 F300
+
+; --- OP1 top  →  IP5 upper-right ---
+G1 X0.217 Y0.300 F500
+
+; --- IP5  →  OP5 right ---
+G1 X0.903 Y0.294 F500
+
+; --- OP5 right  →  IP4 lower-right ---
+G1 X0.361 Y-0.117 F500
+
+; --- IP4  →  OP4 lower-right ---
+G1 X0.559 Y-0.769 F500
+
+; --- OP4 lower-right  →  IP3 bottom ---
+G1 X0.000 Y-0.380 F500
+
+; --- IP3  →  OP3 lower-left ---
+G1 X-0.559 Y-0.769 F500
+
+; --- OP3 lower-left  →  IP2 left ---
+G1 X-0.361 Y-0.117 F500
+
+; --- IP2  →  OP2 left ---
+G1 X-0.903 Y0.294 F500
+
+; --- OP2 left  →  IP1 upper-left ---
+G1 X-0.217 Y0.300 F500
+
+; --- IP1  →  OP1 top (close star) ---
+G1 X0.000 Y0.950 F500
+
+; --- Pen UP ---
+G1 Z5.0 F300
+
+; ==================
+; END - Return to origin
+; ==================
+G0 X0.000 Y0.000
+M2
