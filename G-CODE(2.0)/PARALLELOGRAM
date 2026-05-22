@@ -1,0 +1,51 @@
+; Parallelogram - CNC Pen Machine
+; Centered coordinate system
+; X axis: -0.972mm to +0.972mm
+; Y axis: -1.140mm to +1.140mm
+; Width: 1.944mm (full X range)
+; Height: 1.100mm (within Y range)
+; Horizontal offset: 0.350mm (gives slant angle)
+; Units: mm | Absolute positioning
+
+G21        ; Millimeters
+G90        ; Absolute positioning
+G28        ; Home all axes
+G0 Z5.0
+G0 X0.000 Y0.000
+
+; Parallelogram corners:
+; Bottom-left:  X=-0.972  Y=-0.550
+; Bottom-right: X= 0.622  Y=-0.550
+; Top-right:    X= 0.972  Y= 0.550
+; Top-left:     X=-0.622  Y= 0.550
+
+; ==================
+; PARALLELOGRAM
+; ==================
+
+; --- Move to bottom-left corner ---
+G0 X-0.972 Y-0.550
+
+; --- Pen DOWN ---
+G1 Z-5.0 F300
+
+; --- Bottom edge (left to right) ---
+G1 X0.622 Y-0.550 F500
+
+; --- Right edge (slanted, bottom to top) ---
+G1 X0.972 Y0.550 F500
+
+; --- Top edge (right to left) ---
+G1 X-0.622 Y0.550 F500
+
+; --- Left edge (slanted, top to bottom, closes shape) ---
+G1 X-0.972 Y-0.550 F500
+
+; --- Pen UP ---
+G1 Z5.0 F300
+
+; ==================
+; END - Return to origin
+; ==================
+G0 X0.000 Y0.000
+M2
