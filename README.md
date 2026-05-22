@@ -41,7 +41,7 @@ Key connections:
 
 **G-code Sender:** OpenBuilds CONTROL
 
-**Design Software:** AutoCAD (exported as `.nc` / `.gcode` files)
+**Design Software:** AutoCAD (exported as .gcode files)
 
 ### Flashing GRBL
 
@@ -75,15 +75,15 @@ Located in `/gcode/`:
 
 | File | Description |
 |---|---|
-| `heart.nc` | Heart shape drawing |
-| `star.nc` | Star shape drawing |
-| `test-pattern.nc` | Geometric calibration pattern |
+| `heart.gcode` | Heart shape drawing |
+| `star.gcode` | Star shape drawing |
+| `test-pattern.gcode` | Geometric calibration pattern |
 
 All files were designed in AutoCAD and exported as G-code. To run:
 
 1. Open OpenBuilds CONTROL
 2. Connect to your Arduino via the correct COM port
-3. Load the `.nc` file
+3. Load the `.gcode` file
 4. Home the machine manually
 5. Hit Run
 
